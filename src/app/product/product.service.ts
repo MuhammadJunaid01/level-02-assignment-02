@@ -20,7 +20,6 @@ const getAllProductFromDB = async (searchTerm: string | undefined) => {
       products = await Product.find({});
     } else {
       const regex = new RegExp(searchTerm, "i");
-      console.log("regex", regex);
       products = await Product.find({
         $or: [
           { name: { $regex: regex } },
@@ -31,7 +30,6 @@ const getAllProductFromDB = async (searchTerm: string | undefined) => {
       });
     }
 
-    console.log("products", products);
     if (products.length === 0) {
       throw new Error("something went wrong.try again carefully.");
     }

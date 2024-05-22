@@ -15,7 +15,7 @@ const InventorySchema = z.object(
       required_error: "inventory quantity is required",
       invalid_type_error: "inventory quantity must be a valid number",
     }),
-    inStock: z.boolean({
+    inStock: z.number({
       required_error: "inventory in-stock status is required",
       invalid_type_error: "inventory quantity must be true or false",
     }),

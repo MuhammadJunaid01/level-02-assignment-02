@@ -4,6 +4,7 @@ interface CustomError extends Error {
 }
 
 export const createError = (message: string, statusCode: number) => {
+  console.log("message from create error ", message);
   const error = new Error(message) as CustomError;
   error.statusCode = statusCode;
   return error;

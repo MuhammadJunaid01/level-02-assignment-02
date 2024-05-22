@@ -1,23 +1,16 @@
-import express, {
-  Application,
-  ErrorRequestHandler,
-  NextFunction,
-  Request,
-  Response,
-} from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import { ZodError } from "zod";
-
-import mongoose from "mongoose";
 import { productRouter } from "./app/product/product.route";
 import { errorHandler } from "./app/lib/utils/handle-errors";
+import { orderRouter } from "./app/order/order.route";
 const app: Application = express();
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/api", productRouter);
+app.use("/api", orderRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Server running on http://localhost:5000");
 });
