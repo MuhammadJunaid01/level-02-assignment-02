@@ -1,9 +1,12 @@
 import express from "express";
 import { ProductControllers } from "./product.controller";
 import { validateRequest } from "../lib/utils/validation";
-import { ProductZodSchema, createProductZodSchema } from "./product.validation";
-const { createNewProduct } = ProductControllers;
+import { createProductZodSchema } from "./product.validation";
+const { createNewProduct, getAllPrducts, getSingleProduct } =
+  ProductControllers;
 const router = express.Router();
+router.get("/products", getAllPrducts);
+router.get("/products/:productId", getSingleProduct);
 router.post(
   "/products",
   validateRequest(createProductZodSchema),

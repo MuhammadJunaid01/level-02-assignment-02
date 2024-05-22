@@ -8,13 +8,10 @@ const main = async () => {
       throw new Error("Database URL is not defined.");
     }
 
-    // Connect to the MongoDB database
     await mongoose.connect(dbUri);
 
-    // Log a successful connection
     console.log("MongoDB connected successfully");
 
-    // Start the Express server
     app.listen(config.port, () => {
       console.log(`Server running on http://localhost:${config.port}`);
     });
