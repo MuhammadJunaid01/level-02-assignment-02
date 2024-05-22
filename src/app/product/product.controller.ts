@@ -7,6 +7,7 @@ const {
   getAllProductFromDB,
   getSingleProductFromDB,
   updatedProdcutByIDIntoDB,
+  deleteProductByIDFromDB,
 } = ProductServices;
 const createNewProduct = async (
   req: Request,
@@ -91,10 +92,31 @@ const productUpdateByID = async (
     next(error);
   }
 };
-
+const productDeleteByID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productID = req.params.productId;
+    if (!mongoose.Types.ObjectId.isValid(productID)) {
+      throw createError("Invalid product ID.", 400);
+    }
+    await deleteProductByIDFromDB(productID);
+    return res.status(200).json({
+      success: true,
+      message: "Product deleted successfully!",
+      data: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 export const ProductControllers = {
   createNewProduct,
   getAllPrducts,
   getSingleProduct,
   productUpdateByID,
+
+  productDeleteByID,
 };

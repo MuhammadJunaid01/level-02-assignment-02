@@ -47,9 +47,18 @@ export const updatedProdcutByIDIntoDB = async (
     createError("product not found.", 404);
   }
 };
+const deleteProductByIDFromDB = async (productID: string) => {
+  try {
+    const deleted = await Product.findByIdAndDelete(productID);
+    return deleted;
+  } catch (error) {
+    throw createError("product not found.", 500);
+  }
+};
 export const ProductServices = {
   createProductIntoDB,
   getAllProductFromDB,
   getSingleProductFromDB,
   updatedProdcutByIDIntoDB,
+  deleteProductByIDFromDB,
 };

@@ -5,8 +5,13 @@ import {
   createProductZodSchema,
   updatePrductZodSchema,
 } from "./product.validation";
-const { createNewProduct, getAllPrducts, getSingleProduct, productUpdateByID } =
-  ProductControllers;
+const {
+  createNewProduct,
+  getAllPrducts,
+  getSingleProduct,
+  productUpdateByID,
+  productDeleteByID,
+} = ProductControllers;
 const router = express.Router();
 router.get("/products", getAllPrducts);
 router.get("/products/:productId", getSingleProduct);
@@ -15,7 +20,7 @@ router.put(
   validateRequest(updatePrductZodSchema),
   productUpdateByID
 );
-router.delete("/products/:productId");
+router.delete("/products/:productId", productDeleteByID);
 router.post(
   "/products",
   validateRequest(createProductZodSchema),
