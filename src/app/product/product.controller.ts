@@ -35,7 +35,8 @@ const getAllPrducts = async (
   next: NextFunction
 ) => {
   try {
-    const products = await getAllProductFromDB();
+    const searchTerm = req.query.searchTerm as string | undefined;
+    const products = await getAllProductFromDB(searchTerm);
     if (!products) {
       throw new Error("something went wrong. try agian carefully");
     }

@@ -13,10 +13,26 @@ const createProductIntoDB = async (product: IProduct) => {
     throw new Error("something went wrong.try again carefully.");
   }
 };
-const getAllProductFromDB = async () => {
+const getAllProductFromDB = async (searchTerm: string | undefined) => {
   try {
-    const products = await Product.find({});
-    if (!products) {
+    let products;
+    if (!searchTerm) {
+      products = await Product.find({});
+    } else {
+      const regex = new RegExp(searchTerm, "i");
+      console.log("regex", regex);
+      products = await Product.find({
+        $or: [
+          { name: { $regex: regex } },
+          { description: { $regex: regex } },
+          { category: { $regex: regex } },
+          { tags: { $in: [regex] } },
+        ],
+      });
+    }
+
+    console.log("products", products);
+    if (products.length === 0) {
       throw new Error("something went wrong.try again carefully.");
     }
     return products;
