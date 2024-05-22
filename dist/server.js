@@ -22,7 +22,6 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
             throw new Error("Database URL is not defined.");
         }
         yield mongoose_1.default.connect(dbUri);
-        console.log("MongoDB connected successfully");
         app_1.default.listen(config_1.default.port, () => {
             // console.log(`Server running on http://localhost:${config.port}`);
         });

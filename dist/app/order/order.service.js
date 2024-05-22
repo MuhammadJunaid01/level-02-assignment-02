@@ -24,6 +24,7 @@ const createOrderIntoDB = (order) => __awaiter(void 0, void 0, void 0, function*
             throw new Error("Something went wrong.");
         }
         return newOrder;
+        //eslint-disable-next-line
     }
     catch (error) {
         throw new Error(error.message);
@@ -46,6 +47,7 @@ const getAllOrdersFromDB = (userEmail) => __awaiter(void 0, void 0, void 0, func
             throw new Error("something went wrong");
         }
         return orders;
+        //eslint-disable-next-line
     }
     catch (error) {
         (0, handle_errors_1.createError)(error.message, 404);

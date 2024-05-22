@@ -25,6 +25,7 @@ const handleStockAndQuantity = async (
       await updatedProduct.save();
     }
     return updatedProduct;
+    //eslint-disable-next-line
   } catch (error: any) {
     if (error instanceof Error) {
       throw new Error(error?.message);

@@ -31,6 +31,7 @@ const handleStockAndQuantity = (productID, orderQuantity) => __awaiter(void 0, v
             yield updatedProduct.save();
         }
         return updatedProduct;
+        //eslint-disable-next-line
     }
     catch (error) {
         if (error instanceof Error) {

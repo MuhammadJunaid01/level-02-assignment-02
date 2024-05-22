@@ -15,6 +15,7 @@ const validateRequest = (schema) => (req, res, next) => __awaiter(void 0, void 0
     try {
         yield schema.parseAsync(req);
         next();
+        //eslint-disable-next-line
     }
     catch (error) {
         if (error instanceof zod_1.ZodError) {

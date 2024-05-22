@@ -7,6 +7,7 @@ export const validateRequest =
     try {
       await schema.parseAsync(req);
       next();
+      //eslint-disable-next-line
     } catch (error: any) {
       if (error instanceof ZodError) {
         res.status(400).json({

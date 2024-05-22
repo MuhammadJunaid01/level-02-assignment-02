@@ -12,6 +12,7 @@ const createOrderIntoDB = async (order: IOrder) => {
       throw new Error("Something went wrong.");
     }
     return newOrder;
+    //eslint-disable-next-line
   } catch (error: any) {
     throw new Error(error.message);
   }
@@ -33,6 +34,7 @@ const getAllOrdersFromDB = async (userEmail: string | undefined) => {
       throw new Error("something went wrong");
     }
     return orders;
+    //eslint-disable-next-line
   } catch (error: any) {
     createError(error.message, 404);
   }
