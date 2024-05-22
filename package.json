@@ -2,11 +2,11 @@
   "name": "first-project",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/server.ts",
+  "main": "./dist/server.js",
   "scripts": {
-    "start": "nodemon ./src/server.ts",
+    "start": "node ./dist/server.js",
     "dev": "nodemon && ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "build": "rimraf dist && tsc",
+    "build": "tsc",
     "lint": "npx eslint src --ignore-pattern .ts  --fix",
     "prepare": "husky",
     "lint-staged": "prettier --write"
