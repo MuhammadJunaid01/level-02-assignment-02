@@ -33,8 +33,23 @@ const getSingleProductFromDB = async (productID: string) => {
     throw createError("product not found.", 404);
   }
 };
+export const updatedProdcutByIDIntoDB = async (
+  productID: string,
+  product: IProduct
+) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(productID, product, {
+      new: true,
+    });
+
+    return updatedProduct;
+  } catch (error) {
+    createError("product not found.", 404);
+  }
+};
 export const ProductServices = {
   createProductIntoDB,
   getAllProductFromDB,
   getSingleProductFromDB,
+  updatedProdcutByIDIntoDB,
 };

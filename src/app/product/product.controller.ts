@@ -2,8 +2,12 @@ import { NextFunction, Request, Response } from "express";
 import { ProductServices } from "./product.service";
 import mongoose from "mongoose";
 import { createError } from "../lib/utils/handle-errors";
-const { createProductIntoDB, getAllProductFromDB, getSingleProductFromDB } =
-  ProductServices;
+const {
+  createProductIntoDB,
+  getAllProductFromDB,
+  getSingleProductFromDB,
+  updatedProdcutByIDIntoDB,
+} = ProductServices;
 const createNewProduct = async (
   req: Request,
   res: Response,
@@ -66,8 +70,31 @@ const getSingleProduct = async (
     next(error);
   }
 };
+const productUpdateByID = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const productId = req.params.productId;
+    const product = req.body;
+    const updatedProduct = await updatedProdcutByIDIntoDB(productId, product);
+    if (!updatedProduct) {
+      throw createError("Product not found.", 404);
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Product updated successfully!",
+      data: updatedProduct,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const ProductControllers = {
   createNewProduct,
   getAllPrducts,
   getSingleProduct,
+  productUpdateByID,
 };

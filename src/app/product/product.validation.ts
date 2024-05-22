@@ -1,5 +1,4 @@
-import { NextFunction, Response, Request } from "express";
-import { AnyZodObject, ZodEffects, ZodError, z } from "zod";
+import { z } from "zod";
 
 const VariantSchema = z.object({
   type: z.string({
@@ -59,4 +58,13 @@ export const ProductZodSchema = z.object({
 });
 export const createProductZodSchema = z.object({
   body: ProductZodSchema,
+});
+export const updatePrductZodSchema = z.object({
+  body: ProductZodSchema,
+  params: z.object({
+    productId: z
+      .string()
+      .min(24, { message: "productId length must be 24 characters" })
+      .max(24, { message: "productId length must be 24 characters" }),
+  }),
 });
