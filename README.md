@@ -3,11 +3,11 @@
 First you need to install all dependencies:
 
 ```bash
-npm install
+yarn 
 ```
 
 To run:
 
 ```bash
-npm run dev
+npm  dev
 ```
