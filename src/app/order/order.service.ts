@@ -21,7 +21,10 @@ const createOrderIntoDB = async (order: IOrder) => {
 };
 const getAllOrdersFromDB = async () => {
   try {
-    const orders = await Order.find({});
+    const orders = await Order.find({})
+      .sort({ quantity: -1 })
+      .select("email productId price quantity");
+
     if (orders.length === 0) {
       throw new Error("something went wrong");
     }
