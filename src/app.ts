@@ -16,7 +16,10 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.all("*", (req, res) => {
-  res.status(404).send("Sorry, the page you are looking for does not exist.");
+  res.status(404).json({
+    success: false,
+    message: "Route not found",
+  });
 });
 app.use(errorHandler);
 
