@@ -50,9 +50,12 @@ export const updatedProdcutByIDIntoDB = async (
 const deleteProductByIDFromDB = async (productID: string) => {
   try {
     const deleted = await Product.findByIdAndDelete(productID);
+    if (!deleted) {
+      throw new Error("something went wrong");
+    }
     return deleted;
-  } catch (error) {
-    throw createError("product not found.", 500);
+  } catch (error: any) {
+    throw createError(error.message, 400);
   }
 };
 export const ProductServices = {
