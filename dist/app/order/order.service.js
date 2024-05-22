@@ -18,7 +18,7 @@ const handleStockAndQuantity_1 = __importDefault(require("../lib/utils/handleSto
 const order_model_1 = __importDefault(require("./order.model"));
 const createOrderIntoDB = (order) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const updatedProductQ = yield (0, handleStockAndQuantity_1.default)(order.productId, order.quantity);
+        yield (0, handleStockAndQuantity_1.default)(order.productId, order.quantity);
         const newOrder = yield order_model_1.default.create(order);
         if (!newOrder) {
             throw new Error("Something went wrong.");
@@ -38,7 +38,9 @@ const getAllOrdersFromDB = (userEmail) => __awaiter(void 0, void 0, void 0, func
                 .select("email productId price quantity");
         }
         else {
-            orders = yield order_model_1.default.find({ email: userEmail });
+            orders = yield order_model_1.default.find({ email: userEmail })
+                .sort({ quantity: -1 })
+                .select("email productId price quantity");
         }
         if (orders.length === 0) {
             throw new Error("something went wrong");

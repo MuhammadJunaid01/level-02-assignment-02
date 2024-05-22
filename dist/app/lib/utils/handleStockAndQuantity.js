@@ -33,7 +33,9 @@ const handleStockAndQuantity = (productID, orderQuantity) => __awaiter(void 0, v
         return updatedProduct;
     }
     catch (error) {
-        throw new Error(error === null || error === void 0 ? void 0 : error.message);
+        if (error instanceof Error) {
+            throw new Error(error === null || error === void 0 ? void 0 : error.message);
+        }
     }
 });
 exports.default = handleStockAndQuantity;

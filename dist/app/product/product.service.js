@@ -83,7 +83,9 @@ const deleteProductByIDFromDB = (productID) => __awaiter(void 0, void 0, void 0,
         return deleted;
     }
     catch (error) {
-        throw (0, handle_errors_1.createError)(error.message, 400);
+        if (error instanceof Error) {
+            throw (0, handle_errors_1.createError)(error.message, 400);
+        }
     }
 });
 exports.ProductServices = {
