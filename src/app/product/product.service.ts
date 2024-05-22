@@ -68,8 +68,10 @@ const deleteProductByIDFromDB = async (productID: string) => {
       throw new Error("something went wrong");
     }
     return deleted;
-  } catch (error: any) {
-    throw createError(error.message, 400);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw createError(error.message, 400);
+    }
   }
 };
 export const ProductServices = {

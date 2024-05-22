@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Product from "../../product/product.model";
-import { createError } from "./handle-errors";
 
 const handleStockAndQuantity = async (
   productID: string,
@@ -27,7 +26,9 @@ const handleStockAndQuantity = async (
     }
     return updatedProduct;
   } catch (error: any) {
-    throw new Error(error?.message);
+    if (error instanceof Error) {
+      throw new Error(error?.message);
+    }
   }
 };
 

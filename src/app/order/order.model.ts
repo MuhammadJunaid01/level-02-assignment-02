@@ -1,4 +1,4 @@
-import { Schema, Types, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IOrder } from "./order.interface";
 
 const orderSchema = new Schema<IOrder>(

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon && ts-node-dev --respawn --transpile-only ./src/server.ts",
     "build": "tsc",
-    "lint": "npx eslint src --ignore-pattern .ts --fix",
+    "lint": "npx eslint src --ignore-pattern .ts  --fix",
     "prepare": "husky",
     "lint-staged": "prettier --write"
   },

@@ -5,10 +5,7 @@ import Order from "./order.model";
 
 const createOrderIntoDB = async (order: IOrder) => {
   try {
-    const updatedProductQ = await handleStockAndQuantity(
-      order.productId,
-      order.quantity
-    );
+    await handleStockAndQuantity(order.productId, order.quantity);
 
     const newOrder = await Order.create(order);
     if (!newOrder) {
@@ -27,7 +24,9 @@ const getAllOrdersFromDB = async (userEmail: string | undefined) => {
         .sort({ quantity: -1 })
         .select("email productId price quantity");
     } else {
-      orders = await Order.find({ email: userEmail });
+      orders = await Order.find({ email: userEmail })
+        .sort({ quantity: -1 })
+        .select("email productId price quantity");
     }
 
     if (orders.length === 0) {

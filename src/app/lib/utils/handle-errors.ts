@@ -4,18 +4,12 @@ interface CustomError extends Error {
 }
 
 export const createError = (message: string, statusCode: number) => {
-  console.log("message from create error ", message);
   const error = new Error(message) as CustomError;
   error.statusCode = statusCode;
   return error;
 };
 
-export const errorHandler = (
-  err: CustomError,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const errorHandler = (err: CustomError, req: Request, res: Response) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
   res.status(statusCode).json({

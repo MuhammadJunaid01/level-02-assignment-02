@@ -13,10 +13,10 @@ const main = async () => {
     console.log("MongoDB connected successfully");
 
     app.listen(config.port, () => {
-      console.log(`Server running on http://localhost:${config.port}`);
+      // console.log(`Server running on http://localhost:${config.port}`);
     });
   } catch (error) {
-    console.error("Error during MongoDB connection setup:", error);
+    // console.error("Error during MongoDB connection setup:", error);
 
     process.exit(1);
   }

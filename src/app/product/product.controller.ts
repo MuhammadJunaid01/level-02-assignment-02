@@ -103,8 +103,7 @@ const productDeleteByID = async (
     if (!mongoose.Types.ObjectId.isValid(productID)) {
       throw createError("Invalid product ID.", 400);
     }
-    const deleted = await deleteProductByIDFromDB(productID);
-    console.log("deletd");
+    await deleteProductByIDFromDB(productID);
     return res.status(200).json({
       success: true,
       message: "Product deleted successfully!",
