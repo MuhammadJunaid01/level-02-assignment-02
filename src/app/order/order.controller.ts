@@ -22,7 +22,8 @@ const getAllOrders = async (
   next: NextFunction
 ) => {
   try {
-    const orders = await getAllOrdersFromDB();
+    const userEmail = req.query.userEmail as string | undefined;
+    const orders = await getAllOrdersFromDB(userEmail);
     if (orders && orders.length > 0) {
       return res.status(200).json({
         success: true,

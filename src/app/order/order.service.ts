@@ -19,11 +19,16 @@ const createOrderIntoDB = async (order: IOrder) => {
     throw new Error(error.message);
   }
 };
-const getAllOrdersFromDB = async () => {
+const getAllOrdersFromDB = async (userEmail: string | undefined) => {
   try {
-    const orders = await Order.find({})
-      .sort({ quantity: -1 })
-      .select("email productId price quantity");
+    let orders;
+    if (!userEmail) {
+      orders = await Order.find({})
+        .sort({ quantity: -1 })
+        .select("email productId price quantity");
+    } else {
+      orders = await Order.find({ email: userEmail });
+    }
 
     if (orders.length === 0) {
       throw new Error("something went wrong");

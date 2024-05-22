@@ -13,13 +13,17 @@ const handleStockAndQuantity = async (
     const updatedProduct = await Product.findOneAndUpdate(
       {
         _id: productID,
-        "inventory.quantity": { $gte: orderQuantity },
+        "inventory.inStock": { $eq: true },
       },
       { $inc: { "inventory.quantity": -orderQuantity } },
       { new: true }
     );
     if (!updatedProduct) {
-      throw new Error("product not found or not available quantity.");
+      throw new Error("product not found or insufficient stock.");
+    }
+    if (updatedProduct.inventory.quantity === 0) {
+      updatedProduct.inventory.inStock = false;
+      await updatedProduct.save();
     }
     return updatedProduct;
   } catch (error: any) {

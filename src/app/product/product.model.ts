@@ -1,15 +1,18 @@
 import { Schema, model } from "mongoose";
 import { IProduct } from "./product.interface";
-const variantSchema = new Schema({
-  type: {
-    type: String,
-    require: true,
+const variantSchema = new Schema(
+  {
+    type: {
+      type: String,
+      required: true,
+    },
+    value: {
+      type: String,
+      required: true,
+    },
   },
-  value: {
-    type: String,
-    require: true,
-  },
-});
+  { _id: false }
+);
 const productSchema = new Schema<IProduct>({
   name: {
     type: String,
@@ -35,7 +38,7 @@ const productSchema = new Schema<IProduct>({
       type: Number,
     },
     inStock: {
-      type: Number,
+      type: Boolean,
     },
   },
 });
